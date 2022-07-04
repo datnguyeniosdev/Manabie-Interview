@@ -1,0 +1,1 @@
+flutter test test/main_repository_test.dart test/widget_test.dart
