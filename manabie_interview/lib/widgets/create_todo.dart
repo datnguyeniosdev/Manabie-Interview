@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:manabie_interview/helpers/todo_provider.dart';
+import 'package:manabie_interview/models/TodoEntity.dart';
+import 'package:manabie_interview/repositories/main_repository.dart';
 
 class CreateTodo extends StatefulWidget {
-  CreateTodo({Key? key}) : super(key: key);
+  final Mainrepository mainrepository;
+
+  const CreateTodo({super.key, required this.mainrepository});
 
   @override
   State<CreateTodo> createState() => _CreateTodoState();
@@ -22,22 +25,27 @@ class _CreateTodoState extends State<CreateTodo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Create Task"),
+        title: const Text("Create Task"),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        actions: [IconButton(onPressed: createTask, icon: Icon(Icons.done))],
+        actions: [
+          IconButton(
+            onPressed: createTask,
+            icon: const Icon(Icons.done),
+          )
+        ],
       ),
       body: Column(
         children: [
           TextField(
             controller: _textEditingController,
-            decoration: InputDecoration(hintText: "Task Name"),
+            decoration: const InputDecoration(hintText: "Task Name"),
           ),
           Row(
             children: [
-              Text("Task completed:"),
+              const Text("Task completed:"),
               Checkbox(
                   value: isComplted,
                   onChanged: (value) {
@@ -55,7 +63,7 @@ class _CreateTodoState extends State<CreateTodo> {
   createTask() async {
     if (_textEditingController.text.isEmpty) {
       Widget okButton = TextButton(
-        child: Text("OK"),
+        child: const Text("OK"),
         onPressed: () {
           Navigator.of(context).pop();
         },
@@ -63,8 +71,8 @@ class _CreateTodoState extends State<CreateTodo> {
 
       // set up the AlertDialog
       AlertDialog alert = AlertDialog(
-        title: Text("Warning"),
-        content: Text("Task name do not empty."),
+        title: const Text("Warning"),
+        content: const Text("Task name do not empty."),
         actions: [
           okButton,
         ],
@@ -82,9 +90,9 @@ class _CreateTodoState extends State<CreateTodo> {
     final task = Todo();
     task.title = _textEditingController.text;
     task.done = isComplted;
-    await TodoProvider.shared.insert(task);
+    await widget.mainrepository.create(task);
     Widget okButton = TextButton(
-      child: Text("OK"),
+      child: const Text("OK"),
       onPressed: () {
         Navigator.of(context).pop();
         setState(() {
@@ -96,8 +104,8 @@ class _CreateTodoState extends State<CreateTodo> {
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
-      title: Text("Success"),
-      content: Text("The task has been created."),
+      title: const Text("Success"),
+      content: const Text("The task has been created."),
       actions: [
         okButton,
       ],

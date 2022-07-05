@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:manabie_interview/helpers/todo_provider.dart';
+import 'package:manabie_interview/models/TodoEntity.dart';
 
 class TodosWidget extends StatelessWidget {
   List<Todo> items;
@@ -10,7 +10,7 @@ class TodosWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return items.isEmpty
-        ? Center(
+        ? const Center(
             child: Text("No data to display, please create a new task"),
           )
         : ListView.builder(

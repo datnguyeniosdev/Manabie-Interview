@@ -1,6 +1,5 @@
-import 'dart:ffi';
-
 import 'package:manabie_interview/helpers/todo_provider.dart';
+import 'package:manabie_interview/models/TodoEntity.dart';
 
 abstract class Mainrepository {
   Future<List<Todo>> getAllTask();
