@@ -11,7 +11,7 @@ class TodosWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return items.isEmpty
         ? const Center(
-            child: Text("No data to display, please create a new task"),
+            child: Text('No data to display, please create a new task'),
           )
         : ListView.builder(
             itemCount: items.length,
